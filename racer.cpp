@@ -66,6 +66,7 @@ protected:
     }
 
     virtual bool OnUserUpdate(float deltaTime) {
+        int playerDirection = 0;
 
         if (m_keys[VK_UP].bHeld) {
             m_speed += (2.0f * deltaTime);
@@ -75,10 +76,12 @@ protected:
 
         if (m_keys[VK_LEFT].bHeld) {
             m_playercurvature -= 0.7f * deltaTime;
+            playerDirection = -1;
         }
 
         if (m_keys[VK_RIGHT].bHeld) {
             m_playercurvature += 0.7f * deltaTime;
+            playerDirection = 1;
         }
 
         if (fabs(m_playercurvature - m_trackcurvature) >= 0.63f) {
@@ -198,13 +201,41 @@ protected:
         }
 
         int baseY = 60;
-        DrawStringAlpha(cPos, baseY,     L"   ||####||   ");
-        DrawStringAlpha(cPos, baseY + 1, L"      ##      ");
-        DrawStringAlpha(cPos, baseY + 2, L"     ####     ");
-        DrawStringAlpha(cPos, baseY + 3, L"     ####     ");
-        DrawStringAlpha(cPos, baseY + 4, L"|||  ####  |||");
-        DrawStringAlpha(cPos, baseY + 5, L"|||########|||");
-        DrawStringAlpha(cPos, baseY + 6, L"|||  ####  |||");
+
+        switch (playerDirection) {
+            case 0:
+                DrawStringAlpha(cPos, baseY,     L"      __      ");
+                DrawStringAlpha(cPos, baseY + 1, L"     /GT\\     ");
+                DrawStringAlpha(cPos, baseY + 2, L"     ####     ");
+                DrawStringAlpha(cPos, baseY + 3, L"    ######    ");
+                DrawStringAlpha(cPos, baseY + 4, L"     #||#     ");
+                DrawStringAlpha(cPos, baseY + 5, L"    ##||##    ");
+                DrawStringAlpha(cPos, baseY + 6, L"    ##||##    ");
+                DrawStringAlpha(cPos, baseY + 7, L"     #||#     ");
+                break;
+            case 1: // aka right
+                DrawStringAlpha(cPos, baseY,     L"        __    ");
+                DrawStringAlpha(cPos, baseY + 1, L"       /GT/   ");
+                DrawStringAlpha(cPos, baseY + 2, L"      ####    ");
+                DrawStringAlpha(cPos, baseY + 3, L"     ######   ");
+                DrawStringAlpha(cPos, baseY + 4, L"     #//###   ");
+                DrawStringAlpha(cPos, baseY + 5, L"    ##//###   ");
+                DrawStringAlpha(cPos, baseY + 6, L"    #||##     ");
+                DrawStringAlpha(cPos, baseY + 7, L"    #//#      ");
+                break;
+            case -1: // left
+                DrawStringAlpha(cPos, baseY,     L"   __         ");
+                DrawStringAlpha(cPos, baseY + 1, L"  \\GT\\       ");
+                DrawStringAlpha(cPos, baseY + 2, L"   ####      ");
+                DrawStringAlpha(cPos, baseY + 3, L"  ######     ");
+                DrawStringAlpha(cPos, baseY + 4, L"  ###\\\\#     ");
+                DrawStringAlpha(cPos, baseY + 5, L"  ###\\\\##    ");
+                DrawStringAlpha(cPos, baseY + 6, L"    ##||#     ");
+                DrawStringAlpha(cPos, baseY + 7, L"     #\\\\#     ");
+                break;
+        }
+
+
 
 
         // debug stats
