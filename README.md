@@ -10,3 +10,7 @@ MinGW64 tools using the C++17 standard. You can use those tools together with th
 - [Visual Studio Code](https://code.visualstudio.com/)
 
 All thanks goes to Javidx9 @ OneLoneCoder.com, for making those awesome videos.
+
+### Screenshots
+
+![Screenshot](screenies/screenshot1.png "Racer game screenshot")
